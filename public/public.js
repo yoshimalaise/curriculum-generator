@@ -17,7 +17,7 @@ function navigateToLoadingScreen() {
 function navigateToQrCode(imgUrl) {
   hideCenterElements();
   document.getElementById("qr-code").style.display = 'block';
-  document.getElementById("qr-image").src = imgUrl;
+  // document.getElementById("qr-image").src = imgUrl;
 }
 
 async function analyzeRepo(event) {
