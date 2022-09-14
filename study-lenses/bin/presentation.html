@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <link rel="stylesheet" href="bootstrap/css/bootstrap.css">
+        <script src="bootstrap/js/bootstrap.js"></script>
+        <script src="bootstrap/js/bootstrap.bundle.js"></script>
+        <link rel="stylesheet" href="revealjs/reset.css">
+		<link rel="stylesheet" href="revealjs/reveal.css">
+		<link rel="stylesheet" href="revealjs/theme/black.css">
+        <link rel="stylesheet" href="revealjs/plugin/highlight/monokai.css">
+        <link rel="stylesheet" href="style/main.css">
+        
+        <script src="revealjs/reveal.js"></script>
+		<script src="revealjs/plugin/notes/notes.js"></script>
+		<script src="revealjs/plugin/markdown/markdown.js"></script>
+		<script src="revealjs/plugin/highlight/highlight.js"></script>
+
+        <meta  charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Presentations</title>
+
+        <style>
+            #select-presentation-button {
+                margin: 10px;
+            }
+
+            #slides {
+                width: 100%;
+                height: 100%;
+            }
+
+            .container { 
+                width: 100%;
+                height: 100%;
+            }
+
+            .reveal, .slides {
+                width: 100%;
+                height: 100%;
+            }
+        </style>
+    </head>
+    <body>
+        <nav class="navbar navbar-light bg-light">
+            <span id="title" class="navbar-brand mb-0 h1"> Presentations </span>
+        </nav>
+
+        <div class="container">
+            <div id="dropdown-button" class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                  Select presentation
+                </button>
+                <ul id="select-presentation-button" class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                    <!--
+                  <li><a class="dropdown-item" href="#">Action</a></li>
+                  <li><a class="dropdown-item" href="#">Another action</a></li>
+                  <li><a class="dropdown-item" href="#">Something else here</a></li>
+                    -->
+                </ul>
+            </div>
+
+            <div class="reveal">
+                <div id="slides" class="slides">
+
+                </div>
+            </div>
+        </div>
+    </body>
+
+    <script type="text/javascript">
+        let presentations = [];
+
+        var queryDict = {};
+        location.search.substr(1).split("&").forEach(function(item) {queryDict[item.split("=")[0]] = item.split("=")[1]});
+        const selectedChapter = queryDict['chapter'];
+        console.log('selected chapter', selectedChapter);
+
+        async function loadReveal() {
+            await Reveal.initialize(document.getElementById('slides'), {
+				controls: true,
+				progress: true,
+				center: true,
+				hash: true,
+                embedded: true,
+                markdown: {
+                    smartypants: true
+                },
+
+				plugins: [ RevealMarkdown, RevealHighlight ]
+			});
+        }
+
+        document.getElementById('dropdown-button').onclick = async (event) => {
+            const selectPresentationName = event?.toElement?.innerText ?? undefined;
+            console.log('selected element', selectPresentationName);
+            if (!selectPresentationName) {
+                return
+            }
+
+            const presentation = presentations.find(p => p.name.replace(".presentation.md", "") === selectPresentationName);
+            if (!presentation) {
+                return
+            }
+
+            document.getElementById("slides").innerHTML = presentation.body;
+            await loadReveal();
+        }
+
+        
+
+        async function loadPage() {
+            const res = await fetch('/problemset.json');
+            const entries = (await res.json()).entries;
+            presentations = entries.find(e => e.name === selectedChapter).presentations;
+            console.log('selected presentations', presentations);
+
+            const dropdown = document.getElementById('select-presentation-button');
+            dropdown.innerHTML = presentations.map(p => `<li><a class="dropdown-item" href="#">${p.name.replace(".presentation.md", "")}</a></li>`).join("");
+        }
+
+        window.onload = () => loadPage();
+    </script>
+</html>

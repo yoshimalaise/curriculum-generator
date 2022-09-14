@@ -53,7 +53,7 @@ class HomePageService {
             <div class="card-body">
                 <h5 class="card-title">${chapter.name}</h5>
                 <p class="card-text">${converter.makeHtml(chapter?.description ?? "")}</p>
-                <a href="#" class="card-link">Watch Presentations</a>
+                <a href="presentation.html?chapter=${chapter.name}" class="card-link">Watch Presentations</a>
                 <a href="/chapters/${chapter.name}?--defaults" target="_blank" class="card-link">Open in Study Lenses</a>
             </div>
         </div>
