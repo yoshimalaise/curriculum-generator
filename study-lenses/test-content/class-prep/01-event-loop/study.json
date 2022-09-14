@@ -1,0 +1,13 @@
+{
+  "--defaults": {
+    ".md": "study"
+  },
+  "study": {
+    "clearScheduled": true,
+    "dependencies": [
+      {
+        "path": "/lib/labeled-logger.js"
+      }
+    ]
+  }
+}

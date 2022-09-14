@@ -1,0 +1,15 @@
+{
+  "study": {
+    "hello": "benjamin",
+    "eval": true,
+    "openIn": "jsTutor"
+  },
+  "hello-world": {
+    "/": "chups"
+  },
+  "render": {
+    "save": true
+  },
+  "--lenses": "./lenses",
+  "Port": 8080
+}

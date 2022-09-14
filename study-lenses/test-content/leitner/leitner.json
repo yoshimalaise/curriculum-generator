@@ -1,0 +1,40 @@
+{
+  "schedule": {
+    "lastStudied": "date string"
+  },
+  "boxes": {
+    "1": [
+      "./loops/while.md",
+      "./loops/for-of.md",
+      "./variables/declare.md",
+      "./functions/parameters.md",
+      "./flashcard.md",
+      "./loops/for.md",
+      "./variables/assign.md",
+      "./functions/return-values.md",
+      "./README.md",
+      "flashcard.md",
+      "functions/arguments.md",
+      "functions/parameters.md",
+      "functions/return-values.md",
+      "loops/for-in.md",
+      "loops/for-of.md",
+      "loops/for.md",
+      "loops/while.md",
+      "variables/assign.md",
+      "variables/declare.md",
+      "variables/initialize.md"
+    ],
+    "2": [
+      "./loops/for-in.md"
+    ],
+    "3": [],
+    "4": [],
+    "5": [],
+    "6": [],
+    "7": [
+      "./functions/arguments.md",
+      "./variables/initialize.md"
+    ]
+  }
+}

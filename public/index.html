@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <link rel="stylesheet" href="bootstrap-5.2.0-beta1-dist/css/bootstrap.css">
+    <script src="bootstrap-5.2.0-beta1-dist/js/bootstrap.js"></script>
+    <link rel="stylesheet" href="main.css">
+    <meta  charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>JSStudyBuddy Dataset Generator</title>
+  </head>
+
+  <!-- center element will always display one of the 3 screens -->
+  <div class="container">
+
+    <!--the loading screen-->
+    <div id="loading-bar" class="loading-bar">
+      <div class="loading-bar progress">
+        <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
+      </div>
+      <div class="loading-text">Generating problems. Please wait.</div>
+    </div>
+
+     <!--the drop zone-->
+     <!--
+    <div id="btn-span">
+      <button id="btnSelectRepo">
+        Select repo
+      </button>
+    </div>
+    -->
+    <div id="file-upload-wrapper" class="file-upload-wrapper">
+      <button id="btnSelectRepo" class="btn btn-primary" type="submit">Select repo to generate dataset</button>
+   </div>
+
+   <!-- qr code -->
+    <div id="qr-code" class="qr-code">
+      <img class="qr-image" id="qr-image" alt="qr-code" src=""></img>
+      <br/>
+      <button id="btnBack" class="btn btn-primary" type="submit">Scan another repo</button>
+    </div>
+
+  </div>
+
+  <script src="./public.js"></script>
+</html>

@@ -1,0 +1,65 @@
+{
+  "name": "repo-analyser",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "electron-forge start",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "package": "electron-forge package",
+    "make": "electron-forge make"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@awesome-cordova-plugins/spinner-dialog": "^5.43.0",
+    "@babel/parser": "^7.18.5",
+    "@babel/traverse": "^7.18.5",
+    "cordova-plugin-native-spinner": "^1.1.4",
+    "cors": "^2.8.5",
+    "electron-forge": "^5.2.4",
+    "electron-squirrel-startup": "^1.0.0",
+    "express": "^4.18.1",
+    "g": "^2.0.1",
+    "ip": "^1.1.8",
+    "localtunnel": "^2.0.2",
+    "ngrok": "^4.3.1",
+    "qrcode": "^1.5.0"
+  },
+  "devDependencies": {
+    "@electron-forge/cli": "^6.0.0-beta.63",
+    "@electron-forge/maker-deb": "^6.0.0-beta.63",
+    "@electron-forge/maker-rpm": "^6.0.0-beta.63",
+    "@electron-forge/maker-squirrel": "^6.0.0-beta.63",
+    "@electron-forge/maker-zip": "^6.0.0-beta.63",
+    "electron": "^19.0.4"
+  },
+  "config": {
+    "forge": {
+      "packagerConfig": {},
+      "makers": [
+        {
+          "name": "@electron-forge/maker-squirrel",
+          "config": {
+            "name": "repo_analyser"
+          }
+        },
+        {
+          "name": "@electron-forge/maker-zip",
+          "platforms": [
+            "darwin"
+          ]
+        },
+        {
+          "name": "@electron-forge/maker-deb",
+          "config": {}
+        },
+        {
+          "name": "@electron-forge/maker-rpm",
+          "config": {}
+        }
+      ]
+    }
+  }
+}

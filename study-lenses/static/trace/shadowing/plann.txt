@@ -1,0 +1,31 @@
+1. cek (no store)
+  leave out:
+    instrumented functions called by outside world (callbacks passed to natives/libraries)
+    store. can be managed by JS, i just look at it
+    tracking changes to objects by non-instrumented code
+2. store
+  - entering membrane territory
+  ie. splice array - proxify array to trace changes
+    more protection - weakmap from proxy to arrays
+http://matt.might.net/articles/cesk-machines/
+
+
+easy fix for native HOFs
+  register all declarations in code
+  do not render when not within one of these's calls
+
+
+pieces
+  user advice
+  combiner
+    cesking advice
+
+
+1. user writes advice
+2. passes advice to combiner
+3. combiner returns combined advice & new history
+
+it should
+  know at each step if it was pointcuted or not
+    need to also wrap the user's pointcut
+
