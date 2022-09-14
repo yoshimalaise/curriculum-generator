@@ -6,6 +6,8 @@ const fs = require('fs');
 const { opendir, readFile } = require('fs/promises');
 const FileCopyService = require('../services/file-copy-service.js');
 const { outputPath } = require('../state/state.js');
+const prompt = require('electron-prompt');
+const QRCode = require('qrcode');
 
 class FileSelectionController {
   constructor(server) {
@@ -29,6 +31,22 @@ class FileSelectionController {
       }
       state.outputPath = outputDialogRes.filePaths[0];
       state.chaptersPath = `${state.outputPath}/bin/chapters`;
+      state.curriculumName = await prompt({
+        title: 'Name',
+        label: 'Curriculum name:',
+        value: state.outputPath.split('/').pop(),
+        type: 'input'
+      });
+
+      state.baseUrl = await prompt({
+        title: 'Website',
+        label: 'URL:',
+        value: 'http://example.org',
+        inputAttrs: {
+            type: 'url'
+        },
+        type: 'input'
+      });
 
       this.fileCopyService.copyStudyLenses(state.outputPath);
 
@@ -49,6 +67,7 @@ class FileSelectionController {
       }
       
       this.fileCopyService.saveProblemsetFile();
+      state.qrCode = await QRCode.toDataURL(`${state.baseUrl}/problemset.json`);
       this.fileCopyService.saveHomePage();
       res.json({qrCode: state.qrCode, url: state.ngrokUrl});
       return;
@@ -64,12 +83,19 @@ class FileSelectionController {
       const buffer = await readFile(p);
       const body = buffer.toString();
       const data = JSON.parse(body);
+
+      let readmeBody = "";
+      if (fs.existsSync(`${folderPath}/README.md`)){
+        const readMeBuffer = await readFile(`${folderPath}/README.md`);
+        readmeBody = readMeBuffer.toString();
+      }
+
       state.ignoreList = [...state.originalIgnoreList, ...(data?.ignoreList ?? [])];
-      return ({ name:  data?.name ?? folderPath.split('/').pop(), description: data?.description ?? ""});
+      return ({ name:  data?.name ?? folderPath.split('/').pop(), description: data?.description ?? readmeBody});
     } else {
       console.log('no curriculum.json found, proceeding with default values.');
       state.ignoreList = state.originalIgnoreList;
-      return ({ name:  folderPath.split('/').pop()});
+      return ({ name:  folderPath.split('/').pop(), description: readmeBody});
     }
 
   }

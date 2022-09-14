@@ -1,0 +1,19 @@
+body {
+    background-color: #DDDDDD;
+}
+
+.navbar-brand {
+    padding: 5px;
+    padding-left: 10px;
+}
+
+.container {
+    width: 100%;
+    max-width: 1200px;
+
+}
+
+.card {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}

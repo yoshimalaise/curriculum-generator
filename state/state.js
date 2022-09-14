@@ -11,7 +11,9 @@ const state = {
                         '.reveal.js', '.bundle.js', '.re.js'],
   ignoreList: [],
   outputPath: "",
-  chaptersPath: ""
+  chaptersPath: "",
+  curriculumName: "",
+  baseUrl: ""
 }
 
 module.exports = state;
