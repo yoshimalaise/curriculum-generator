@@ -48,6 +48,7 @@ class FileSelectionController {
         }
       }
       
+      this.fileCopyService.saveProblemsetFile();
       res.json({qrCode: state.qrCode, url: state.ngrokUrl});
       return;
     });

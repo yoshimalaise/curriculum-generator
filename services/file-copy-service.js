@@ -1,5 +1,7 @@
 const fse = require('fs-extra');
-const path = require("path")
+const fs = require('fs');
+const path = require("path");
+const state = require('../state/state');
 
 class FileCopyService {
     copyStudyLenses(destinationPath) {
@@ -8,6 +10,11 @@ class FileCopyService {
 
     copyFolder(src, dst) {
         fse.copySync(src, dst, { overwrite: true });
+    }
+
+    saveProblemsetFile() {
+        const targetPath = `${state.outputPath}/bin/problemset.json`;
+        fs.writeFileSync(targetPath, JSON.stringify({entries: state.entries}));
     }
 }
 
