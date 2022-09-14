@@ -9,7 +9,9 @@ const state = {
   originalIgnoreList: ['node_modules', 'dom-io', 'qs.js', 
                         'libs/', 'lib/', 'assets/', '.min.js',
                         '.reveal.js', '.bundle.js', '.re.js'],
-  ignoreList: []
+  ignoreList: [],
+  outputPath: "",
+  chaptersPath: ""
 }
 
 module.exports = state;
