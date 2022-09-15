@@ -23,6 +23,7 @@ const sandbox = require('./sandbox.js');
 const repl = require('./repl.js');
 const p5 = require('./p5.js');
 const tutor = require('./tutor.js');
+const cors = require('cors')
 
 // error and exit handling ...
 process.on('exit', function onExit(code) {
@@ -46,7 +47,7 @@ process.on('unhandledRejection', function onUnhandledPromise(e) {
 
 // initialize express ...
 const app = express();
-
+app.use(cors());
 app.use(morgan('dev'));
 
 app.use(bodyParser.urlencoded({ extended: true }));
