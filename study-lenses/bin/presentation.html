@@ -12,8 +12,8 @@
         
         <script src="revealjs/reveal.js"></script>
 		<script src="revealjs/plugin/notes/notes.js"></script>
-		<script src="revealjs/plugin/markdown/markdown.js"></script>
 		<script src="revealjs/plugin/highlight/highlight.js"></script>
+        <script src="revealjs/plugin/markdown/markdown.js"></script>
 
         <meta  charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -22,6 +22,10 @@
         <style>
             #select-presentation-button {
                 margin: 10px;
+            }
+
+            #dropdown-button {
+                margin: 20px;
             }
 
             #slides {
@@ -61,7 +65,11 @@
 
             <div class="reveal">
                 <div id="slides" class="slides">
+                    <section data-markdown>
+                        <textarea id="presentation-body" data-template>
 
+                        </textarea>
+                    </section>
                 </div>
             </div>
         </div>
@@ -76,18 +84,16 @@
         console.log('selected chapter', selectedChapter);
 
         async function loadReveal() {
-            await Reveal.initialize(document.getElementById('slides'), {
-				controls: true,
+            const deck = new Reveal({plugins: [ RevealMarkdown, RevealHighlight ]});
+            await deck.initialize(document.querySelector('#slides'), {
+                controls: true,
 				progress: true,
 				center: true,
-				hash: true,
                 embedded: true,
                 markdown: {
                     smartypants: true
                 },
-
-				plugins: [ RevealMarkdown, RevealHighlight ]
-			});
+            });
         }
 
         document.getElementById('dropdown-button').onclick = async (event) => {
@@ -102,7 +108,13 @@
                 return
             }
 
-            document.getElementById("slides").innerHTML = presentation.body;
+            document.getElementById("slides").innerHTML = 
+            (`<section data-markdown>
+                <textarea id="presentation-body" data-template>
+
+                </textarea>
+            </section>`);
+            document.getElementById("presentation-body").innerHTML = presentation.body;
             await loadReveal();
         }
 
